@@ -16,18 +16,27 @@ public class ZkCrud {
     ZooKeeper zk;
     private static final int CONNECTION_TIMEOUT = 30000;
     private static final String CONNECTION_STRING = "mini2:2181";
-    Watcher wc = new Watcher() {
-
-        public void process(WatchedEvent watchedEvent) {
-            System.out.println("watching...");
-        }
-    };
+    Watcher wc ;
+//    Watcher wc = new Watcher() {
+//        public void process(WatchedEvent watchedEvent) {
+//            System.out.println("path:"+watchedEvent.getPath()+",type:"+watchedEvent.getType()+",state:"+watchedEvent.getState());
+//            System.out.println("watching...");
+//        }
+//    };
 
     @Before
     public void init() {
 
+        wc = new Watcher() {
+            public void process(WatchedEvent watchedEvent) {
+                System.out.println("path:"+watchedEvent.getPath()+",type:"+watchedEvent.getType()+",state:"+watchedEvent.getState());
+                System.out.println(watchedEvent.toString());
+                System.out.println("watching...");
+            }
+        };
+
         try {
-            zk = new ZooKeeper(CONNECTION_STRING, CONNECTION_TIMEOUT, this.wc);
+            zk = new ZooKeeper(CONNECTION_STRING, CONNECTION_TIMEOUT, wc);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -46,7 +55,7 @@ public class ZkCrud {
     public void createZkNode() {
         //create / "createZkNode"
         try {
-            String resultPath = zk.create("/zkTest", "createZkNode".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+            String resultPath = zk.create("/zkTest24", "createZkNode".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
 
         } catch (KeeperException e) {
             e.printStackTrace();
@@ -58,8 +67,8 @@ public class ZkCrud {
     @Test
     public void getZkNode() {
         try {
-            if (zk.exists("/zkTest", this.wc) != null) {
-                byte[] data = zk.getData("/zkTest", this.wc, null);
+            if (zk.exists("/zkTest24", this.wc) != null) {
+                byte[] data = zk.getData("/zkTest24", this.wc, null);
                 System.out.println(new String(data));
             } else {
                 System.out.println("no zkTest zkNode");
@@ -75,12 +84,13 @@ public class ZkCrud {
     @Test
     public void setZkNode() {
         try {
-            zk.setData("/zkTest", new String("helloworld2").getBytes(), -1);
+            zk.setData("/zkTest", new String("helloworld20").getBytes(), -1);
         } catch (KeeperException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
-        };
+        }
+        ;
 
     }
 
