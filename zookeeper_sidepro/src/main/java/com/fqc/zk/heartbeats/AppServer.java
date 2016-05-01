@@ -13,7 +13,7 @@ public class AppServer {
     private static final String CONNECTION = "mini2:2181";
     private static final int CONNECTION_TIMEOUT = 30000;
     private static final String sGroup = "/sGroup";
-    private static final String subNode = "/subNode";
+    private static final String subNode = "/subNode7";
     private ZooKeeper zooKeeper;
 
     public static void main(String[] args) {
@@ -52,7 +52,7 @@ public class AppServer {
         try {
             try {
                 if (!isExistZkNode(sGroup + subNode)) {
-                    createPath = zk.create(sGroup + subNode, new String("appServer").getBytes("utf-8"), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+                    createPath = zk.create(sGroup + subNode, new String("appServer7").getBytes("utf-8"), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
                 } else {
                     System.out.println("已经存在节点，直接返回");
                     createPath=sGroup+subNode;
