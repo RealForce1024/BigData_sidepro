@@ -6,7 +6,8 @@
   <artifactId>bigdata_sidepro</artifactId>
   <version>1.0-SNAPSHOT</version>
   <modules>
-    <module>zookeeperz_sidepro</module>
+    <module>zookeeper_sidepro</module>
+    <module>hadoop_sidepro</module>
   </modules>
   <packaging>pom</packaging>
 

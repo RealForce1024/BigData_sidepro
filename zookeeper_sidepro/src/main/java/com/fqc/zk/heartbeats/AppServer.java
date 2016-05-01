@@ -19,8 +19,9 @@ public class AppServer {
     public static void main(String[] args) {
         AppServer appServer = new AppServer();
         ZooKeeper zk = appServer.getConnection();
-        String path = appServer.createZnode(zk);
-        appServer.getNodeData(path);
+//        String path = appServer.createZnode(zk);
+//        appServer.getNodeData(path);
+        appServer.deleteZnode(zk);
         appServer.handler();
 
     }
@@ -55,7 +56,7 @@ public class AppServer {
                     createPath = zk.create(sGroup + subNode, new String("appServer7").getBytes("utf-8"), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
                 } else {
                     System.out.println("已经存在节点，直接返回");
-                    createPath=sGroup+subNode;
+                    createPath = sGroup + subNode;
                 }
 
             } catch (UnsupportedEncodingException e) {
@@ -71,6 +72,23 @@ public class AppServer {
         return createPath;
     }
 
+
+    private boolean deleteZnode(ZooKeeper zk) {
+        String path = sGroup + "/subNode7";
+        if (!isExistZkNode(path)) {
+            System.out.println("要删除的节点不存在");
+            return false;
+        }
+        try {
+            zk.delete(path,-1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (KeeperException e) {
+            e.printStackTrace();
+        }
+        return true;
+
+    }
 
     private ZooKeeper getConnection() {
         try {
@@ -98,7 +116,7 @@ public class AppServer {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return isExist==null?false:true;
+        return isExist == null ? false : true;
     }
 
 }

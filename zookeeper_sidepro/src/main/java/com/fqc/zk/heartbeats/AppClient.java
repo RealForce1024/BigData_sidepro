@@ -34,8 +34,6 @@ public class AppClient {
         try {
             List<String> subNodes = zk.getChildren(sGroup, true);
             for (String node : subNodes) {
-
-
                 byte[] data = zk.getData(sGroup+"/"+node, false, stat);
                 newServerList.add(new String(data));
 
@@ -48,8 +46,6 @@ public class AppClient {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-
     }
 
     private void handler() {
