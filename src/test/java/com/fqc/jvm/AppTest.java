@@ -1,4 +1,4 @@
-package com.fqc.bigdata;
+package com.fqc.jvm;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
