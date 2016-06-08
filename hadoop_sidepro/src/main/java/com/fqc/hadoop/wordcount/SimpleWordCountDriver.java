@@ -32,9 +32,9 @@ public class SimpleWordCountDriver {
         job.setMapOutputValueClass(IntWritable.class);
 
         FileInputFormat.setInputPaths(job,"c:/a.txt");
-        FileOutputFormat.setOutputPath(job,new Path("c:/bbbbvdvvnbbdBB.txt"));
+        FileOutputFormat.setOutputPath(job,new Path("c:/wordcount/output"));
         boolean res = job.waitForCompletion(true);
-        int a = 1/0;
+        //int a = 1/0; 为了测试exit 1
         System.exit(res?0:1);
 
     }
