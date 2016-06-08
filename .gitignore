@@ -14,7 +14,7 @@
 hs_err_pid*
 
 *.iml
-target
+target/
 .idea
 out/
 hadoop_sidepro/logs/*
